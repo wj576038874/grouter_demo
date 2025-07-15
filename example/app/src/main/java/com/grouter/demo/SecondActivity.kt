@@ -10,11 +10,14 @@ import com.grouter.RouterField
 /**
  * Created by wenjie on 2025/07/15.
  */
-@RouterActivity("second")
+@RouterActivity("second2")
 class SecondActivity : AppCompatActivity() {
 
     @RouterField("id")
     private var id: Int = 0
+
+    @RouterField("name")
+    private var name: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

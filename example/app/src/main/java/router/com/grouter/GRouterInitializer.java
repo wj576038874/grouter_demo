@@ -13,9 +13,9 @@ public class GRouterInitializer extends GRouter {
   private static HashMap<String, String> taskMap = new HashMap<>();
 
   static {
-    // app
+    // joyrun
     activityMap.put("asd", "com.grouter.demo.MainActivity");
-    activityMap.put("second", "com.grouter.demo.SecondActivity");
+    activityMap.put("second2", "com.grouter.demo.SecondActivity");
   }
   static {
   }

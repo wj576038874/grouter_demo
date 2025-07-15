@@ -6,7 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.grouter.GActivityCenter
+//import com.grouter.GActivityCenter
 import com.grouter.RouterActivity
 
 @RouterActivity("asd")
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn).setOnClickListener {
-            GActivityCenter.SecondActivity().id(100).start(this)
+//            GActivityCenter.SecondActivity().id(100).name("asd").start(this)
         }
     }
 }

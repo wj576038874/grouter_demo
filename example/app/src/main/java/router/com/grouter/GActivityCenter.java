@@ -1,5 +1,7 @@
 package com.grouter;
 
+import java.lang.String;
+
 public class GActivityCenter {
   public static BuilderSet.MainActivityHelper MainActivity() {
     return new BuilderSet.MainActivityHelper();
@@ -23,6 +25,11 @@ public class GActivityCenter {
 
       public SecondActivityHelper id(int id) {
         put("id",id);
+        return this;
+      }
+
+      public SecondActivityHelper name(String name) {
+        put("name",name);
         return this;
       }
     }

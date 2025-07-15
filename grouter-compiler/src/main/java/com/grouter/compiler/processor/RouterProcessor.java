@@ -113,8 +113,9 @@ public class RouterProcessor extends AbstractProcessor {
         this.messagerUtils = processingEnv.getMessager();
         Map<String, String> map = processingEnv.getOptions();
         Set<String> keys = map.keySet();
-
+        System.out.println("##########map"+map.size());
         for (String key : keys) {
+
             if ("MODULE_NAME".equals(key)) {
                 this.MODULE_NAME = map.get(key);
             }

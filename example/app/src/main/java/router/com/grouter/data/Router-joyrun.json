@@ -20,9 +20,15 @@
 					"queryName":"id",
 					"rawType":"int",
 					"type":"int"
+				},
+				{
+					"name":"name",
+					"queryName":"name",
+					"rawType":"java.lang.String",
+					"type":"java.lang.String"
 				}
 			],
-			"path":"second",
+			"path":"second2",
 			"type":"com.grouter.demo.SecondActivity"
 		}
 	],
