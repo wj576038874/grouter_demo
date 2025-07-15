@@ -1,0 +1,33 @@
+{
+	"activityModels":[
+		{
+			"description":"",
+			"exported":true,
+			"module":"",
+			"name":"",
+			"params":[],
+			"path":"asd",
+			"type":"com.grouter.demo.MainActivity"
+		},
+		{
+			"description":"",
+			"exported":true,
+			"module":"",
+			"name":"",
+			"params":[
+				{
+					"name":"id",
+					"queryName":"id",
+					"rawType":"int",
+					"type":"int"
+				}
+			],
+			"path":"second",
+			"type":"com.grouter.demo.SecondActivity"
+		}
+	],
+	"componentModels":[],
+	"delegateModels":[],
+	"interceptorModels":[],
+	"taskModels":[]
+}
