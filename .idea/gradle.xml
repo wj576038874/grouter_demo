@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/grouter" />
             <option value="$PROJECT_DIR$/grouter-annotation" />
             <option value="$PROJECT_DIR$/grouter-compiler" />
-            <option value="$PROJECT_DIR$/grouter-gradle-plugin" />
             <option value="$PROJECT_DIR$/grouter-kotlinextensions" />
           </set>
         </option>
