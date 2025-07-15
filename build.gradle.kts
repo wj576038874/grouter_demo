@@ -9,5 +9,8 @@ plugins {
 buildscript{
     dependencies{
 //        classpath(project("grouter-gradle-plugin"))
+//        classpath("com.github.dcendents:android-maven-gradle-plugin:2.1")
+        classpath("com.github.wj576038874:BetaUploader-1.5.2:1.5.3")
+
     }
 }

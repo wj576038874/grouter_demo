@@ -1,5 +1,5 @@
 pluginManagement {
-    includeBuild("build-plugin")
+//    includeBuild("build-plugin")
     repositories {
         google {
             content {
@@ -10,6 +10,11 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        jcenter()
+        mavenCentral()
+        google()
+        maven("https://jitpack.io")
+        maven("https://maven.google.com")
     }
 }
 dependencyResolutionManagement {
@@ -26,4 +31,4 @@ include(":grouter")
 include(":grouter-annotation")
 include(":grouter-compiler")
 include(":grouter-kotlinextensions")
-//include(":grouter-gradle-plugin")
+include(":grouter-gradle-plugin")
