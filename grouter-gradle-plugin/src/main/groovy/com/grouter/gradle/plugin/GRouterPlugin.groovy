@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON
 import com.grouter.compiler.RouterBuildHelper
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import com.android.build.gradle.AppPlugin
-import com.android.build.gradle.LibraryPlugin
+//import com.android.build.gradle.AppPlugin
+//import com.android.build.gradle.LibraryPlugin
 
 //import com.android.build.gradle.api.BaseVariant
 
@@ -56,8 +56,12 @@ class GRouterPlugin implements Plugin<Project> {
         }
 //        def router = project.extensions.create('grouter', GRouterExtension)
 
-        def hasApp = project.plugins.withType(AppPlugin)
-        def hasLib = project.plugins.withType(LibraryPlugin)
+//        def hasApp = project.plugins.withType(AppPlugin)
+//        def hasLib = project.plugins.withType(LibraryPlugin)
+
+        def hasApp = project.pluginManager.hasPlugin("com.android.application")
+        def hasLib = project.pluginManager.hasPlugin("com.android.library")
+
         if (!hasApp && !hasLib) {
             throw new IllegalStateException("'android' or 'android-library' plugin required.")
         }
@@ -132,65 +136,65 @@ class GRouterPlugin implements Plugin<Project> {
             }
         }
         // 生成文档插件
-        def exportHTML = project.tasks.create("exportHTML").doFirst {
-            def url = this.getClass().getResource("/META-INF/grouter.html")
-            if (url != null) {
-                try {
-                    File sourceDir = new File(project.rootDir, GROUTER_SOURCE_PATH)
-                    File jsonDir = new File(sourceDir, "com/grouter/data")
-                    def routerModel = RouterBuildHelper.getRouterModel(jsonDir, project.name, GROUTER_SCHEME, GROUTER_HOST, true)
-                    def activityModels = JSON.toJSONString(routerModel.activityModels, true)
-                    def componentModels = JSON.toJSONString(routerModel.componentModels, true)
-                    def taskModels = JSON.toJSONString(routerModel.taskModels, true)
-                    def delegateModels = JSON.toJSONString(routerModel.delegateModels, true)
-                    def is = this.getClass().getResourceAsStream("/META-INF/grouter.html")
-                    def lines = is.readLines()
-                    StringBuilder stringBuilder = new StringBuilder()
-                    for (line in lines) {
-                        stringBuilder.append(line).append('\n')
-//                        println(line)
-                    }
-                    def htmlText = stringBuilder.toString()
-                    htmlText = htmlText.replace("@ACTIVITY_MODELS", activityModels)
-                    htmlText = htmlText.replace("@COMPONENT_MODELS", componentModels)
-                    htmlText = htmlText.replace("@TASK_MODELS", taskModels)
-                    htmlText = htmlText.replace("@DELEGATE_MODELS", delegateModels)
-                    def outFile = new File(project.rootDir, "build/grouter.html")
-                    outFile.write(htmlText)
-                    println("生成HTML：file://" + outFile.absolutePath)
-                } catch (Exception e) {
-                    e.printStackTrace()
-                }
-            } else {
-                println("找不到")
-            }
-        }
-        exportHTML.setGroup("GRouter")
+//        def exportHTML = project.tasks.create("exportHTML").doFirst {
+//            def url = this.getClass().getResource("/META-INF/grouter.html")
+//            if (url != null) {
+//                try {
+//                    File sourceDir = new File(project.rootDir, GROUTER_SOURCE_PATH)
+//                    File jsonDir = new File(sourceDir, "com/grouter/data")
+//                    def routerModel = RouterBuildHelper.getRouterModel(jsonDir, project.name, GROUTER_SCHEME, GROUTER_HOST, true)
+//                    def activityModels = JSON.toJSONString(routerModel.activityModels, true)
+//                    def componentModels = JSON.toJSONString(routerModel.componentModels, true)
+//                    def taskModels = JSON.toJSONString(routerModel.taskModels, true)
+//                    def delegateModels = JSON.toJSONString(routerModel.delegateModels, true)
+//                    def is = this.getClass().getResourceAsStream("/META-INF/grouter.html")
+//                    def lines = is.readLines()
+//                    StringBuilder stringBuilder = new StringBuilder()
+//                    for (line in lines) {
+//                        stringBuilder.append(line).append('\n')
+////                        println(line)
+//                    }
+//                    def htmlText = stringBuilder.toString()
+//                    htmlText = htmlText.replace("@ACTIVITY_MODELS", activityModels)
+//                    htmlText = htmlText.replace("@COMPONENT_MODELS", componentModels)
+//                    htmlText = htmlText.replace("@TASK_MODELS", taskModels)
+//                    htmlText = htmlText.replace("@DELEGATE_MODELS", delegateModels)
+//                    def outFile = new File(project.rootDir, "build/grouter.html")
+//                    outFile.write(htmlText)
+//                    println("生成HTML：file://" + outFile.absolutePath)
+//                } catch (Exception e) {
+//                    e.printStackTrace()
+//                }
+//            } else {
+//                println("找不到")
+//            }
+//        }
+//        exportHTML.setGroup("GRouter")
 
 
-        def kotlinMode = project.plugins.hasPlugin("kotlin-android")
-        // 如果是Kotlin项目，应该判断是否有 kotlin-kapt，如果没有就添加
-        if (kotlinMode && !project.plugins.hasPlugin("kotlin-kapt")) {
-            project.plugins.apply("kotlin-kapt")
-            project.println("GRouter add project.plugins.apply(\"kotlin-kapt\")")
-        }
-        if (DEV_NOT_AUTO_DEPENDENCIES != null && DEV_NOT_AUTO_DEPENDENCIES.toString().toBoolean()) {
-            println("开发模式，不自动增加依赖")
-            return
-        }
-        def version = "1.2.1"
-        project.dependencies {
-            api "com.grouter:grouter:$version"
-//                project.println("GRouter add api 'com.grouter:grouter:$version'")
-            if (kotlinMode) {
-                // 增加构造器
-                kapt "com.grouter:grouter-compiler:$version"
-//                project.println("GRouter add kapt 'com.grouter:grouter-compiler:$version'")
-            } else {
-                // Java 项目
-                annotationProcessor "com.grouter:grouter-compiler:$version"
-//                project.println("GRouter add annotationProcessor 'com.grouter:grouter-compiler:$version'")
-            }
-        }
+//        def kotlinMode = project.plugins.hasPlugin("kotlin-android")
+//        // 如果是Kotlin项目，应该判断是否有 kotlin-kapt，如果没有就添加
+//        if (kotlinMode && !project.plugins.hasPlugin("kotlin-kapt")) {
+//            project.plugins.apply("kotlin-kapt")
+//            project.println("GRouter add project.plugins.apply(\"kotlin-kapt\")")
+//        }
+//        if (DEV_NOT_AUTO_DEPENDENCIES != null && DEV_NOT_AUTO_DEPENDENCIES.toString().toBoolean()) {
+//            println("开发模式，不自动增加依赖")
+//            return
+//        }
+//        def version = "1.2.1"
+//        project.dependencies {
+//            api "com.grouter:grouter:$version"
+////                project.println("GRouter add api 'com.grouter:grouter:$version'")
+//            if (kotlinMode) {
+//                // 增加构造器
+//                kapt "com.grouter:grouter-compiler:$version"
+////                project.println("GRouter add kapt 'com.grouter:grouter-compiler:$version'")
+//            } else {
+//                // Java 项目
+//                annotationProcessor "com.grouter:grouter-compiler:$version"
+////                project.println("GRouter add annotationProcessor 'com.grouter:grouter-compiler:$version'")
+//            }
+//        }
     }
 }
